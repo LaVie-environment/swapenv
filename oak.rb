@@ -53,3 +53,31 @@ reservation = ec2_client.run_instances({
 
 # Get the instance object
 instance = reservation.instances[0]
+
+
+require 'aws-sdk-ec2'
+
+AWS_ACCESS_KEY_ID = 'your-access-key'
+AWS_SECRET_ACCESS_KEY = 'your-secret-key'
+
+Aws.config.update({
+  region: 'us-east-1',
+  credentials: Aws::Credentials.new(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+})
+
+ec2_client = Aws::EC2::Client.new
+
+# Assuming you have obtained 'instance' object from previous code
+# Here, 'instance' is an instance of Aws::EC2::Instance
+
+# Access the public DNS name of the EC2 instance
+public_dns_name = instance.public_dns_name
+puts "Public DNS Name: #{public_dns_name}"
+
+# Access the private IP address of the EC2 instance
+private_ip_address = instance.private_ip_address
+puts "Private IP Address: #{private_ip_address}"
+
+# Access the instance ID of the EC2 instance
+instance_id = instance.id
+puts "Instance ID: #{instance_id}"
